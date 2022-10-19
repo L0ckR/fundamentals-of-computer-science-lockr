@@ -1,0 +1,171 @@
+00, ,$,glpp
+
+glpp,0,<,glpp  glpp,1,<,glpp  glpp,2,<,glpp  glpp,3,<,glpp  glpp,$,<,glpp
+glpp, ,+,gl
+
+
+gl,0,<,gl  gl,1,<,gl  gl,2,<,gl  gl,3,<,gl  gl,A,<,gl  gl,B,<,gl  gl,C,<,gl  gl,D,<,gl  gl,$,<,gl
+gl,+,<,gl  gl,p,<,gl  gl, ,>,cop
+
+cop,0,A,pas0  cop,1,B,pas1  cop,2,C,pas2  cop,3,D,pas3  cop,+,p,pas+
+cop,A,>,cop  cop,B,>,cop  cop,C,>,cop  cop,D,>,cop  cop,p,>,cop 
+cop,$,=,gr
+
+
+pas0,0,>,pas0  pas0,1,>,pas0  pas0,2,>,pas0  pas0,3,>,pas0  pas0,$,>,pas0  pas0,+,>,pas0 
+pas0,A,>,pas0  pas0,B,>,pas0  pas0,C,>,pas0  pas0,D,>,pas0  pas0,p,>,pas0
+pas0, ,0,gl
+ 
+pas1,0,>,pas1  pas1,1,>,pas1  pas1,2,>,pas1  pas1,3,>,pas1  pas1,$,>,pas1  pas1,+,>,pas1
+pas1,A,>,pas1  pas1,B,>,pas1  pas1,C,>,pas1  pas1,D,>,pas1  pas1,p,>,pas1
+pas1, ,1,gl
+
+pas2,0,>,pas2  pas2,1,>,pas2  pas2,2,>,pas2  pas2,3,>,pas2  pas2,$,>,pas2  pas2,+,>,pas2
+pas2,A,>,pas2  pas2,B,>,pas2  pas2,C,>,pas2  pas2,D,>,pas2  pas2,p,>,pas2
+pas2, ,2,gl
+
+pas3,0,>,pas3  pas3,1,>,pas3  pas3,2,>,pas3  pas3,3,>,pas3  pas3,$,>,pas3  pas3,+,>,pas3 
+pas3,A,>,pas3  pas3,B,>,pas3  pas3,C,>,pas3  pas3,D,>,pas3  pas3,p,>,pas3
+pas3, ,3,gl
+ 
+pas+,0,>,pas+  pas+,1,>,pas+  pas+,2,>,pas+  pas+,3,>,pas+  pas+,$,>,pas+  pas+,+,>,pas+ 
+pas+,A,>,pas+  pas+,B,>,pas+  pas+,C,>,pas+  pas+,D,>,pas+  pas+,p,>,pas+
+pas+, ,+,gl
+
+gr,0,>,gr  gr,1,>,gr  gr,2,>,gr  gr,3,>,gr  
+gr,A,0,gr  gr,B,1,gr  gr,C,2,gr  gr,D,3,gr
+gr,$,>,gr  gr,+,>,gr  gr,p,+,gr gr, ,<,gtp
+
+gtp,0,<,gtp  gtp,1,<,gtp  gtp,2,<,gtp  gtp,3,<,gtp  gtp,A,<,gtp  gtp,B,<,gtp  gtp,C,<,gtp  gtp,D,<,gtp  gtp,$,<,gtp
+gtp,+,=,fs
+
+
+fs,0,<,z  fs,1,<,x  fs,+,<,fs  fs,A,<,fs  fs,B,<,fs  fs,C,<,fs  fs,D,<,fs  fs,^,<,fs  fs,$,=,gra
+
+z,1,C,cl  z,0,A,cl  z,$,A,rkA
+
+x,1,D,cl  x,0,B,cl  x,$,B,rkB
+
+rkA,A,$,rkA  rkA,$,>,rkA  rkA,0,A,gra
+
+rkB,B,$,rkB  rkB,$,>,rkB  rkB,1,B,gra
+
+cl,1,^,cl  cl,0,^,cl  cl,^,=,fs  cl,+,<,fs  cl,A,>,cl  cl,B,>,cl  cl,C,>,cl  cl,D,>,cl
+
+
+gra,0,>,gra  gra,1,>,gra  gra,2,>,gra  gra,3,>,gra  
+gra,A,0,gra  gra,B,1,gra  gra,C,2,gra  gra,D,3,gra
+gra,^,>,gra
+gra,$,>,gra  gra,+,>,gra  gra,p,+,gra gra, ,<,gtpa
+
+
+gtpa,0,<,gtpa  gtpa,1,<,gtpa  gtpa,2,<,gtpa  gtpa,3,<,gtpa  gtpa,A,<,gtpa gtpa,B,<,gtpa  gtpa,C,<,gtpa  gtpa,D,<,gtpa  gtpa,$,<,gtpa
+gtpa,+,<,pl
+
+
+pl,0,^,plA  pl,1,^,plB  pl,2,^,plC  pl,3,^,plD  pl,^,<,pl  pl,$,=,fin1
+
+plA,0,>,plA  plA,1,>,plA  plA,2,>,plA  plA,3,>,plA  plA,$,>,plA  plA,+,>,plA 
+plA,A,<,ifA  plA,B,<,ifA  plA,C,<,ifA  plA,D,<,ifA  plA,^,>,plA
+plA, ,<,ifA
+
+plB,0,>,plB  plB,1,>,plB  plB,2,>,plB  plB,3,>,plB  plB,$,>,plB  plB,+,>,plB 
+plB,A,<,ifB  plB,B,<,ifB  plB,C,<,ifB  plB,D,<,ifB  plB,^,>,plB
+plB, ,<,ifB
+
+plC,0,>,plC  plC,1,>,plC  plC,2,>,plC  plC,3,>,plC  plC,$,>,plC  plC,+,>,plC 
+plC,A,<,ifC  plC,B,<,ifC  plC,C,<,ifC  plC,D,<,ifC  plC,^,>,plC
+plC, ,<,ifC
+
+plD,0,>,plD  plD,1,>,plD  plD,2,>,plD  plD,3,>,plD  plD,$,>,plD  plD,+,>,plD 
+plD,A,<,ifD  plD,B,<,ifD  plD,C,<,ifD  plD,D,<,ifD  plD,^,>,plD
+plD, ,<,ifD
+
+ifA,0,A,gtpa  ifA,1,B,gtpa  ifA,2,C,gtpa  ifA,3,D,gtpa  ifA,+,A,gtp+
+
+ifB,0,B,gtpa  ifB,1,C,gtpa  ifB,2,D,gtpa  ifB,3,A,gobackA  ifB,+,B,gtp+
+
+ifC,0,C,gtpa  ifC,1,D,gtpa  ifC,2,A,gobackB  ifC,3,B,gobackB  ifC,+,C,gtp+
+
+ifD,0,D,gtpa  ifD,1,A,gobackC  ifD,2,B,gobackC  ifD,3,C,gobackC  ifD,+,D,gtp+
+
+gtp+,A,<,gtp+  gtp+,B,<,gtp+  gtp+,C,<,gtp+  gtp+,D,<,gtp+  gtp+,^,+,gtpa
+gtp+,0,<,gtp+  gtp+,1,<,gtp+  gtp+,2,<,gtp+  gtp+,3,<,gtp+
+
+gobackA,A,<,goback
+
+gobackAag,0,<,goback
+
+gobackB,A,<,goback  gobackB,B,<,goback
+
+gobackC,A,<,goback  gobackC,B,<,goback  gobackC,C,<,goback
+
+
+goback,0,1,gtpa  goback,1,2,gtpa  goback,2,3,gtpa  goback,3,0,gobackAag  goback,+,1,gtp+
+
+
+
+
+
+delete+^,+, ,delete+^  delete+^,^, ,delete+^  delete+^, ,>,fin
+
+notdeletep,p,+,notdeletep  notdeletep,+,>,fin
+
+
+fin1,0,<,fin1  fin1,1,<,fin1  fin1,2,<,fin1  fin1,3,<,fin1  fin1,A,<,fin1  fin1,B,<,fin1  fin1,C,<,fin1  fin1,D,<,fin1  fin1,$,<,fin1  fin1,^,<,fin1
+fin1,+,^,fin1  fin1,p,<,fin1  fin1, ,>,fin
+
+fin,$,>,fin
+fin,0,>,fin  fin,1,>,fin  fin,2,>,fin  fin,3,>,fin  
+fin,A,0,fin  fin,B,1,fin  fin,C,2,fin  fin,D,3,fin
+fin,+,=,delete+^  fin,^,=,delete+^  fin,p,=,notdeletep fin, ,=,$$$
+
+$$$, ,$,glf
+
+glf,0,<,glf  glf,1,<,glf
+glf,2,<,glf  glf,3,<,glf
+glf, ,>,fc
+glf,$,<,glf
+
+grf, ,>,grf
+grf,$, ,end1
+grf,0,=,fc  grf,1,=,fc
+grf,2,=,fc  grf,3,=,fc
+
+fc,0, ,fc0  fc,1, ,fc1
+fc,2, ,fc2  fc,3, ,fc3
+fc, ,=,fin
+
+
+fc0, ,<,fc0  fc0,$,>,post0
+fc0,A,>,post0  fc0,C,>,post0
+fc0,B,>,post0  fc0,D,>,post0
+post0, ,A,post0  post0,A,>,grf
+
+fc1, ,<,fc1  fc1,$,>,post1
+fc1,A,>,post1  fc1,C,>,post1
+fc1,B,>,post1  fc1,D,>,post1
+post1, ,B,post1  post1,B,>,grf
+
+fc2, ,<,fc2  fc2,$,>,post2
+fc2,A,>,post2  fc2,C,>,post2
+fc2,B,>,post2  fc2,D,>,post2
+post2, ,C,post2  post2,C,>,grf
+
+fc3, ,<,fc3  fc3,$,>,post3
+fc3,A,>,post3  fc3,C,>,post3
+fc3,B,>,post3  fc3,D,>,post3
+post3, ,D,post3  post3,D,>,grf
+
+
+end1,0,<,end1  end1,1,<,end1  end1,2,<,end1  end1,3,<,end1  end1,A,<,end1  end1,B,<,end1  end1,C,<,end1  end1,D,<,end1  end1,$,<,end1  end1, ,<,end1
+end1,+,<,end2
+
+end2,$,=,delete$
+end2,0,>,end2  end2,1,>,end2  end2,2,>,end2  end2,3,>,end2  
+end2,A,0,end2  end2,B,1,end2  end2,C,2,end2  end2,D,3,end2
+end2,+, ,end0  end2, ,#,end2
+
+end0, ,>,end2
+
+delete$,$, ,delete$  delete$, ,>,end2
