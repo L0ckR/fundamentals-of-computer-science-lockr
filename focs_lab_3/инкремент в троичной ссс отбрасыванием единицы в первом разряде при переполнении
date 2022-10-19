@@ -1,0 +1,44 @@
+00, ,$,gl
+
+gl,0,<,gl  gl,1,<,gl  gl,2,<,gl  gl,A,<,gl  gl,B,<,gl  gl,C,<,gl  gl,$,<,gl
+gl,p,<,gl  gl, ,>,cop
+
+cop,0,A,pas0  cop,1,B,pas1  cop,2,C,pas2
+cop,A,>,cop  cop,B,>,cop  cop,C,>,cop  cop,p,>,cop 
+cop,$,=,gr
+
+pas0,0,>,pas0  pas0,1,>,pas0  pas0,2,>,pas0  pas0,3,>,pas0  pas0,$,>,pas0  pas0,+,>,pas0 
+pas0,A,>,pas0  pas0,B,>,pas0  pas0,C,>,pas0  pas0,D,>,pas0  pas0,p,>,pas0
+pas0, ,0,gl
+ 
+pas1,0,>,pas1  pas1,1,>,pas1  pas1,2,>,pas1  pas1,3,>,pas1  pas1,$,>,pas1  pas1,+,>,pas1
+pas1,A,>,pas1  pas1,B,>,pas1  pas1,C,>,pas1  pas1,D,>,pas1  pas1,p,>,pas1
+pas1, ,1,gl
+
+pas2,0,>,pas2  pas2,1,>,pas2  pas2,2,>,pas2  pas2,3,>,pas2  pas2,$,>,pas2  pas2,+,>,pas2
+pas2,A,>,pas2  pas2,B,>,pas2  pas2,C,>,pas2  pas2,D,>,pas2  pas2,p,>,pas2
+pas2, ,2,gl
+
+gr,0,>,gr  gr,1,>,gr  gr,2,>,gr gr,$,>,gr
+gr, ,<,pl
+
+pl,0,B,fin1  pl,1,C,fin1  pl,2,A,gobackA
+
+
+gobackA,A,<,goback
+gobackAag,0,<,goback
+  
+goback,0,1,fin1  goback,1,2,fin1  goback,2,0,gobackAag
+goback,$,=,fin1
+
+fin1,0,<,fin1  fin1,1,<,fin1  fin1,2,<,fin1  fin1,A,<,fin1  fin1,B,<,fin1  fin1,C,<,fin1
+fin1,$,<,fin1  fin1,^,<,fin1
+fin1, ,>,fin
+
+fin,$, ,delete^$
+fin,0,>,fin  fin,1,>,fin  fin,2,>,fin 
+fin,A,0,fin  fin,B,1,fin  fin,C,2,fin
+fin,^,=,delete^$
+fin, ,#,fin
+
+delete^$,$, ,delete^$  delete^$,^, ,delete^$  delete^$, ,>,fin
