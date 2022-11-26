@@ -2,8 +2,6 @@
 #include <stdbool.h>
 #include <ctype.h>
 
-typedef unsigned int uint;
-
 typedef enum
 {
     OUTSIDE,
@@ -14,8 +12,10 @@ typedef enum
 } Conditions;
 
 
-void fd_ispaniol(char fd){
-    switch (fd){
+void fd_ispaniol(char fd)
+{
+    switch (fd)
+    {
         case '2': 
             printf("veinti"); 
             return;
@@ -37,8 +37,10 @@ void fd_ispaniol(char fd){
     }
 }
 
-void sd_ispaniol(char sd){
-    switch (sd){
+void sd_ispaniol(char sd)
+{
+    switch (sd)
+    {
         case '1': 
             printf("uno ");
             return;
@@ -63,9 +65,12 @@ void sd_ispaniol(char sd){
     }
 }
 
-void to_ispaniol(char fd, char sd){
-    if (sd == '0'){
-        switch (fd){
+void to_ispaniol(char fd, char sd)
+{
+    if (sd == '0')
+    {
+        switch (fd)
+        {
             case '2': 
                 printf("veinte ");
                 return;
@@ -92,11 +97,13 @@ void to_ispaniol(char fd, char sd){
 }
 
 
-bool is_8iric(char ch){
+bool is_8iric(char ch)
+{
     return isdigit(ch) && ch != '8' && ch != '9';
 }
 
-void ispanio(){
+void ispanio()
+{
     char temp;
     char new;
     int k_0 = 0;
@@ -107,7 +114,8 @@ void ispanio(){
         switch (condition) 
         {
             case OUTSIDE:
-                if (ch == '0' || ch == '-'){
+                if (ch == '0' || ch == '-')
+                {
                     k_0 = 0;
                     minus = false;
                     if (ch == '-')
@@ -146,9 +154,11 @@ void ispanio(){
                     putchar(ch);
                     break;
                 }
+                putchar(ch);
                 condition = OUTSIDE;
             case INSIDE_0:
-                if (ch == '0'){
+                if (ch == '0')
+                {
                     k_0++;
                     continue;
                 } else if  (is_8iric(ch) && ch != '1')
@@ -170,6 +180,8 @@ void ispanio(){
                         putchar('0');
                     }
                     putchar(ch);
+                    k_0 = 0;
+                    minus = false;
                     condition = OUTSIDE;
                     continue;
                 }else
@@ -284,7 +296,7 @@ void ispanio(){
                     printf("diecisiete ");
                     condition = OUTSIDE;
                     continue;
-                }else {
+                }else if (new == EOF ){
                     if (minus)
                     {
                         putchar('-');
@@ -294,6 +306,35 @@ void ispanio(){
                     }
                     putchar('1');
                     putchar(ch);
+                    putchar(new);
+                    break;
+
+                }else if (new == ' ' ){
+                    if (minus)
+                    {
+                        putchar('-');
+                    }
+                    for (int i = 0; i < k_0; i++){
+                        putchar('0');
+                    }
+                    putchar('1');
+                    putchar(ch);
+                    putchar(new);
+                    condition = OUTSIDE;
+                    continue;
+
+                }else
+                {
+                    if (minus)
+                    {
+                        putchar('-');
+                    }
+                    for (int i = 0; i < k_0; i++){
+                        putchar('0');
+                    }
+                    putchar('1');
+                    putchar(ch);
+                    putchar(new);
                     condition = WRONG_WORD;
                     continue;
                 }
@@ -307,5 +348,4 @@ int main(){
     ispanio();
     return 0;
 }
-
 
