@@ -1,50 +1,31 @@
-/* Задание на +0.5
-Представьте себе таблицу размера N x N. В i-ой строке и j-ом столбце записано число i*j, где i, j от 1 до n.
-Задано целое положительно число x. Необходимо отыскать сколько раз число x встретится в таблице.
-Алгоритм с временем O(N^2) НЕПРИЕМЛЕМ. Это означает, что строить таблицу явно ЗАПРЕЩЕНО.
-Перебирать все N^2 элементов таблицы ЗАПРЕЩЕНО.
-*/
+/* Лабраторная работа 8.
+ * Студент гр.08-108 Далгат Ибрагимов*/
 
-#include <stdio.h>  
-#include <stdlib.h>
+#include <stdio.h>
 
-typedef unsigned uint;
-
-uint count(uint n, uint x)
-{
-    uint counter = 0;
-    if (x <= n*n)
-    {
-        if (x >= n)
-        {
-            for (int i=1; i <= n; i++)
-            {
-                if ((x%i == 0)&&(x/i <= n))
-                {
-                    counter++;
-                }
-            }
-        }
-        else
-        {
-            for (int i=1; i <= x; i++)
-            {
-                if ((x%i == 0)&&(x/i <= n))
-                {
-                    counter++;
-                }
-            }
-        }
-        
-        
+int main() {
+    int x , y, i;
+    printf("Первое число: ");
+    scanf("%d",&x);
+    printf("Второе число: ");
+    scanf("%d",&y);
+    printf("Сложение (1), вычитание (2), умножение (3) или деление (4): ");
+    scanf("%d",&i);
+    if(i==1)
+        printf("%d + %d = %d \n",x,y,x+y);
+    if(i==2)
+        printf("%d - %d = %d \n",x,y,x-y);
+    if(i==3){
+        long int res;
+        res=x*y;
+        printf("%d * %d = %d \n",x,y,res);
     }
-    return counter;
- }
-
-int main() 
-{ 
-    uint x, n;
-    scanf("%u %u", &n, &x);
-    printf("%u", count(n, x));
+    if(i==4){
+        float x1,y1,res;
+        x1=x;
+        y1=y;
+        res=x1/y1;
+        printf("%f./%f. = %f \n",x1,y1,res);
+    }
     return 0;
 }
