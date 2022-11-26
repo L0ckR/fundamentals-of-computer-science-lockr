@@ -2,8 +2,6 @@
 #include <stdbool.h>
 #include <ctype.h>
 
-typedef unsigned int uint;
-
 typedef enum
 {
     OUTSIDE,
