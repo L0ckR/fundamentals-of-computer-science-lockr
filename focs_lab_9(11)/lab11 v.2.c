@@ -104,12 +104,12 @@ bool is_8iric(char ch)
 
 void ispanio()
 {
-    char temp;
-    char new;
+    int temp;
+    int new;
     int k_0 = 0;
     bool minus = false;
     Conditions condition = OUTSIDE;
-    for (char ch = getchar(); ch != EOF; ch = getchar())
+    for (int ch = getchar(); ch != EOF; ch = getchar())
     {
         switch (condition) 
         {
@@ -348,4 +348,5 @@ int main(){
     ispanio();
     return 0;
 }
+
 
