@@ -40,16 +40,15 @@ int main()
     //  = 7;
     int m[maxn*maxn];
     // = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49};
-    printf("MATRIX SIZE:");
+    printf("MATRIX SIZE:\n");
     scanf("%d", &n);
-    printf("MATRIX:");
+    printf("MATRIX:\n");
     for (int k = 0; k != n*n; k++)
     {
         scanf("%d", m + k);
     }
     int start = 0;
     int end = n*n-1;
-    diag(start, end, n, m);
     while (start != end){
         diag(start, end, n, m);
         left(start, end, n, m);
@@ -71,3 +70,13 @@ int main()
     }
     printf("%d ", m[start]);
 }
+
+
+
+// 1       15      14      13
+// 9       2       16      12
+// 8       10      3       11
+// 7       6       5       4
+
+
+// 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 
