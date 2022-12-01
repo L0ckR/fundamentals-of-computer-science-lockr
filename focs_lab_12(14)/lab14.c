@@ -16,15 +16,7 @@ int end(int k, int i){
         return 0;
     }
 }
-int main()
-{
-    int i, j;
-    int m[maxn*maxn];
-    scanf("%d %d", &i, &j);
-    for (int k = 0; k != i*j; k++)
-    {
-        scanf("%d", m + k);
-    }
+void out(int i, int j, int m[]){
     for (int k = 0; k <= i - 1 + j - 1; k++)
     {
         if (k % 2 != 0){
@@ -39,4 +31,16 @@ int main()
             }
         }
     }
+}
+int main()
+{
+    int i, j;
+    int m[maxn*maxn];
+    scanf("%d %d", &i, &j);
+    for (int k = 0; k != i*j; k++)
+    {
+        scanf("%d", m + k);
+    }
+    out(i, j, m);
+
 }
