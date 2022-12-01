@@ -114,10 +114,10 @@ void ispanio()
         switch (condition) 
         {
             case OUTSIDE:
+                k_0 = 0;
+                minus = false;
                 if (ch == '0' || ch == '-')
                 {
-                    k_0 = 0;
-                    minus = false;
                     if (ch == '-')
                     {
                         minus = true;
@@ -225,7 +225,7 @@ void ispanio()
                     break;
                 }
                 new = getchar();
-                if ((is_8iric(ch)) && (new == ' '|| new == EOF))
+                if ((is_8iric(ch)) && (new == ' '|| new == EOF || new == '\n' || new == '\t' ))
                 {
                     if (minus)
                     {
@@ -262,7 +262,7 @@ void ispanio()
                     continue;
                 }
             case INSIDE_1_1:
-                if (ch == ' ') 
+                if (new == ' '|| new == EOF || new == '\n' || new == '\t') 
                 {
                     if (minus)
                     {
@@ -274,17 +274,6 @@ void ispanio()
                     putchar(ch);
                     condition = OUTSIDE;
                     continue;
-                }else if (ch == EOF)
-                {
-                    if (minus)
-                    {
-                        putchar('-');
-                    }
-                    for (int i = 0; i < k_0; i++){
-                        putchar('0');
-                    }
-                    putchar(ch);
-                    break;
                 }
                 new = getchar();
                 if (ch == '7' && (new == ' ' || new == EOF))
@@ -296,7 +285,7 @@ void ispanio()
                     printf("diecisiete ");
                     condition = OUTSIDE;
                     continue;
-                }else if (new == EOF ){
+                }else if (new == EOF || new == '\n' || new == '\t' ){
                     if (minus)
                     {
                         putchar('-');
