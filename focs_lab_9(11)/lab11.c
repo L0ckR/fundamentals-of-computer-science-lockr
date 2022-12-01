@@ -12,8 +12,10 @@ typedef enum
 } Conditions;
 
 
-void fd_ispaniol(char fd){
-    switch (fd){
+void fd_ispaniol(char fd)
+{
+    switch (fd)
+    {
         case '2': 
             printf("veinti"); 
             return;
@@ -35,52 +37,57 @@ void fd_ispaniol(char fd){
     }
 }
 
-void sd_ispaniol(char sd){
-    switch (sd){
+void sd_ispaniol(char sd)
+{
+    switch (sd)
+    {
         case '1': 
-            printf("uno\n");
+            printf("uno ");
             return;
         case '2': 
-            printf("dos\n"); 
+            printf("dos "); 
             return;
         case '3': 
-            printf("tres\n"); 
+            printf("tres "); 
             return;
         case '4': 
-            printf("cuatro\n");
+            printf("cuatro ");
              return;
         case '5': 
-            printf("cinco\n"); 
+            printf("cinco "); 
             return;
         case '6': 
-            printf("seis\n"); 
+            printf("seis "); 
             return;
         case '7': 
-            printf("siete\n"); 
+            printf("siete "); 
             return;
     }
 }
 
-void to_ispaniol(char fd, char sd){
-    if (sd == '0'){
-        switch (fd){
+void to_ispaniol(char fd, char sd)
+{
+    if (sd == '0')
+    {
+        switch (fd)
+        {
             case '2': 
-                printf("veinte\n");
+                printf("veinte ");
                 return;
             case '3': 
-                printf("treinta\n");
+                printf("treinta ");
                 return;
             case '4': 
-                printf("cuarenta\n");
+                printf("cuarenta ");
                 return;
             case '5': 
-                printf("cincuenta\n");
+                printf("cincuenta ");
                 return;
             case '6': 
-                printf("sesenta\n");
+                printf("sesenta ");
                 return;
             case '7': 
-                printf("setenta\n");
+                printf("setenta ");
                 return;
         }
     }else{
@@ -90,24 +97,33 @@ void to_ispaniol(char fd, char sd){
 }
 
 
-bool is_8iric(char ch){
+bool is_8iric(char ch)
+{
     return isdigit(ch) && ch != '8' && ch != '9';
 }
 
-void ispanio(){
-    char temp;
+void ispanio()
+{
+    int temp;
+    int new;
+    int k_0 = 0;
     bool minus = false;
     Conditions condition = OUTSIDE;
-    for (char ch = getchar(); ch != EOF; ch = getchar())
+    for (int ch = getchar(); ch != EOF; ch = getchar())
     {
         switch (condition) 
         {
             case OUTSIDE:
-                if (ch == '0' || ch == '-'){
-                    minus = false;
+                k_0 = 0;
+                minus = false;
+                if (ch == '0' || ch == '-')
+                {
                     if (ch == '-')
                     {
                         minus = true;
+                    }else 
+                    {
+                        k_0++;
                     }
                     condition = INSIDE_0;
                     continue;
@@ -121,19 +137,29 @@ void ispanio(){
                     condition = INSIDE_1_1;
                     temp = ch;
                     continue;
+                }else{
+                    putchar(ch);
+                    continue;
                 }
             case WRONG_WORD:
+                k_0 = 0;
+                minus = false;
                 while (ch != ' ' && ch != EOF)
                 {
+                    putchar(ch);
                     ch = getchar();
                 }
                 if (ch == EOF)
                 {
+                    putchar(ch);
                     break;
                 }
+                putchar(ch);
                 condition = OUTSIDE;
             case INSIDE_0:
-                if (ch == '0'){
+                if (ch == '0')
+                {
+                    k_0++;
                     continue;
                 } else if  (is_8iric(ch) && ch != '1')
                 {
@@ -146,22 +172,60 @@ void ispanio(){
                     continue;
                 }else if(ch == ' ')
                 {
+                    if (minus)
+                    {
+                        putchar('-');
+                    }
+                    for (int i = 0; i < k_0; i++){
+                        putchar('0');
+                    }
+                    putchar(ch);
+                    k_0 = 0;
+                    minus = false;
                     condition = OUTSIDE;
                     continue;
                 }else
                 {
+                    if (minus)
+                    {
+                        putchar('-');
+                    }
+                    for (int i = 0; i < k_0; i++){
+                        putchar('0');
+                    }
+                    putchar(ch);
                     condition = WRONG_WORD;
                     continue;
                 }
             case INSIDE_1:
                 if (ch == ' ') 
                 {
+                    if (minus)
+                    {
+                        putchar('-');
+                    }
+                    for (int i = 0; i < k_0; i++){
+                        putchar('0');
+                    }
+                    putchar(temp);
+                    putchar(ch);
                     condition = OUTSIDE;
                     continue;
                 }else if (ch == EOF)
                 {
+                    if (minus)
+                    {
+                        putchar('-');
+                    }
+                    for (int i = 0; i < k_0; i++){
+                        putchar('0');
+                    }
+                    putchar(temp);
+                    putchar(ch);
                     break;
-                }else if (is_8iric(ch) && getchar() == ' ')
+                }
+                new = getchar();
+                if ((is_8iric(ch)) && (new == ' '|| new == EOF || new == '\n' || new == '\t' ))
                 {
                     if (minus)
                     {
@@ -170,28 +234,96 @@ void ispanio(){
                     to_ispaniol(temp, ch);
                     condition = OUTSIDE;
                     continue;
+                }else if(is_8iric(ch)){
+                    if (minus)
+                    {
+                        putchar('-');
+                    }
+                    for (int i = 0; i < k_0; i++){
+                        putchar('0');
+                    }
+                    putchar(temp);
+                    putchar(ch);
+                    putchar(new);
+                    condition = WRONG_WORD;
+                    continue;
                 }else {
+                    if (minus)
+                    {
+                        putchar('-');
+                    }
+                    for (int i = 0; i < k_0; i++){
+                        putchar('0');
+                    }
+                    putchar(temp);
+                    putchar(ch);
+                    putchar(new);
                     condition = WRONG_WORD;
                     continue;
                 }
             case INSIDE_1_1:
-                if (ch == ' ') 
+                if (new == ' '|| new == EOF || new == '\n' || new == '\t') 
                 {
+                    if (minus)
+                    {
+                        putchar('-');
+                    }
+                    for (int i = 0; i < k_0; i++){
+                        putchar('0');
+                    }
+                    putchar(ch);
                     condition = OUTSIDE;
                     continue;
-                }else if (ch == EOF)
-                {
-                    break;
-                }else if (ch == '7' && getchar() == ' ')
+                }
+                new = getchar();
+                if (ch == '7' && (new == ' ' || new == EOF))
                 {
                     if (minus)
                     {
                         printf("menos ");
                     }
-                    printf("diecisiete\n");
+                    printf("diecisiete ");
                     condition = OUTSIDE;
                     continue;
-                }else {
+                }else if (new == EOF || new == '\n' || new == '\t' ){
+                    if (minus)
+                    {
+                        putchar('-');
+                    }
+                    for (int i = 0; i < k_0; i++){
+                        putchar('0');
+                    }
+                    putchar('1');
+                    putchar(ch);
+                    putchar(new);
+                    break;
+
+                }else if (new == ' ' ){
+                    if (minus)
+                    {
+                        putchar('-');
+                    }
+                    for (int i = 0; i < k_0; i++){
+                        putchar('0');
+                    }
+                    putchar('1');
+                    putchar(ch);
+                    putchar(new);
+                    condition = OUTSIDE;
+                    continue;
+
+                }else
+                {
+                    if (minus)
+                    {
+                        putchar('-');
+                    }
+                    for (int i = 0; i < k_0; i++){
+                        putchar('0');
+                    }
+                    putchar('1');
+                    putchar(ch);
+                    putchar(new);
                     condition = WRONG_WORD;
                     continue;
                 }
