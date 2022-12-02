@@ -5,7 +5,7 @@
 #include <stdlib.h> 
 #include <stdbool.h> 
  
-int MAX(a, b){
+int MAX(int a, int b){
     if (a > b){
         return a;
     }else{
@@ -13,7 +13,7 @@ int MAX(a, b){
     }
 }
 
-int MIN(a, b){
+int MIN(int a, int b){
     if (a < b){
         return a;
     }else{
