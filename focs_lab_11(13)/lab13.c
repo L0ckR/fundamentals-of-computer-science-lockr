@@ -78,5 +78,5 @@ void check_neighboured(){
 int main()
 {
     check_neighboured();
-
+    return 0;
 }
