@@ -37,91 +37,7 @@
 3. Выводим Да или Нет в зависимости от значения флага;
 
 ## 7. Сценарий выполнения работы [план работы, первоначальный текст программы в черновике (можно на отдельном листе) и тесты либо соображения по тестированию]. 
-```c:lab.c
-#include <stdio.h>
-#include <stdbool.h>
-#include <ctype.h>
-
-typedef enum
-{
-    OUTSIDE,
-    INSIDE
-} Conditions;
-
-typedef unsigned int uint;
-
-uint char_to_set(char c)
-{
-    c = tolower(c);
-    if(c < 'a' || c > 'z')
-    {
-        return 0;
-    }else{
-        return 1u<<(c-'a');
-    }
-}
-
-void check_neighboured(){
-    bool flag = false;
-    uint set_2;
-    uint set_1 = 67108864;
-    Conditions condition = OUTSIDE;
-    for (char ch = getchar(); ch != EOF; ch = getchar())
-    {
-        switch(condition)
-        {
-            case OUTSIDE:
-                if (isalpha(ch)){
-                    putchar(ch);
-                    set_2 = char_to_set(ch);
-                    condition = INSIDE;
-                    continue;
-                }else
-                {
-                    putchar(ch);
-                    continue;
-                }
-            case INSIDE:
-                if (isalpha(ch))
-                {
-                    putchar(ch);
-                    set_2 = set_2 | char_to_set(ch);
-                    continue;
-                }else if( ch == ' ' || ch == '\n')
-                {
-                    putchar(ch);
-                    if ((set_1 == set_2)&&(set_1 != 67108864)){
-                        flag = true;
-                    }
-                    set_1 = set_2;
-                    condition = OUTSIDE;
-                    continue;
-                }else
-                {
-                    putchar(ch);
-                    continue;
-                }    
-        }
-        if ((set_1 == set_2)&&(set_1 != 67108864)){
-            flag = true;
-        }
-    }
-    if (flag)
-    {
-        printf("\n\n\nYEEEES");
-    }else{
-        printf("\n\n\nNO");
-    }
-}
-
-
-int main()
-{
-    check_neighboured();
-    return 0;
-}
-
-```
+https://github.com/mai-806-1st-year/fundamentals-of-computer-science-superlocker/blob/d4eb0fd18388f8e1f2c4bfdd024286f648f805f4/focs_lab_11(13)/lab13.c#L1-L82
 
 Пункты 1-7 отчета составляются сторого до начала лабораторной работы.
 Допущен к выполнению работы.  
@@ -166,48 +82,7 @@ YEEEES
 ## 10. Замечания автора по существу работы — Написание команд для отработки навыков работы в ОС UNIX.
 
 https://codeforces.com/problemset/problem/1202/A
-```c:lab.c
-#include <stdio.h>
-typedef unsigned int uint;
-
-#define N 100000
-
-
-int main()
-{
-    unsigned char t;
-    scanf("%hhu", &t);
-    while(t--){
-        char a[N] = {0};
-        char b[N] = {0};
-        uint k = N; 
-        scanf("%s", a);
-        while (a[k] != '0' && a[k] != '1'){
-            k--;
-        }
-        uint lena = k;
-        scanf("%s", b);
-        k = N;
-        while (b[k] != '0' && b[k] != '1'){
-            k--;
-        }
-        uint lenb = k;
-        while (b[k] != '1')
-        {
-            k--;
-        }
-        uint posb = lenb - k;
-        k = lena - posb;
-        while (a[k] != '1')
-        {
-            k--;
-        }
-        uint posa = lena - k;
-        printf("%u\n", posa - posb);
-    }
-    return 0;
-}
-```
+https://github.com/mai-806-1st-year/fundamentals-of-computer-science-superlocker/blob/d4eb0fd18388f8e1f2c4bfdd024286f648f805f4/focs_lab_11(13)/lab13-2%20v3.c#L1-L41
 ## 11. Выводы
 
 Была написана программа на языке на Си, выполняющая указанное вариантом действие над значениями в целом типе данных. В результате выполнения работы, были приобретены навыки для работы с числами в целом типе данных.
