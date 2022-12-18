@@ -35,7 +35,7 @@
 4. Вывод ответа.
 
 ## 7. Сценарий выполнения работы [план работы, первоначальный текст программы в черновике (можно на отдельном листе) и тесты либо соображения по тестированию]. 
-https://github.com/mai-806-1st-year/fundamentals-of-computer-science-superlocker/blob/ca235291c57e6ddb6b02b38077b323f28ea3dd32/focs_lab_13(15)/lab15.c
+https://github.com/mai-806-1st-year/fundamentals-of-computer-science-superlocker/blob/ca235291c57e6ddb6b02b38077b323f28ea3dd32/focs_lab_13(15)/lab15.cL1-L44
 Пункты 1-7 отчета составляются сторого до начала лабораторной работы.
 Допущен к выполнению работы.  
 <b>Подпись преподавателя:</b> ________________
