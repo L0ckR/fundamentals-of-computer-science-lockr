@@ -3,7 +3,7 @@
 #include <ctype.h>
 #include <limits.h>
 #define UINT_WIDTH (32)
-#define MAX_ALPHABET ((UINT_MAX >> (UINT_WIDTH - (26U))) + 2)
+#define MAX_ALPHABET ((UINT_MAX >> (UINT_WIDTH - (26U))) + 1)
 
 typedef enum
 {
