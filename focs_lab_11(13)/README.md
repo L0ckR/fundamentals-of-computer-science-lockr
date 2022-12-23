@@ -37,7 +37,7 @@
 3. Выводим Да или Нет в зависимости от значения флага;
 
 ## 7. Сценарий выполнения работы [план работы, первоначальный текст программы в черновике (можно на отдельном листе) и тесты либо соображения по тестированию]. 
-https://github.com/mai-806-1st-year/fundamentals-of-computer-science-superlocker/blob/master/focs_lab_11(13)/lab13.c#L1-L82
+https://github.com/mai-806-1st-year/fundamentals-of-computer-science-superlocker/blob/48258b3a864391f4d4531efa4191c1676b1e2c4c/focs_lab_11(13)/lab13.c#L1-L86
 
 Пункты 1-7 отчета составляются сторого до начала лабораторной работы.
 Допущен к выполнению работы.  
