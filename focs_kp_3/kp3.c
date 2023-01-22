@@ -39,7 +39,7 @@ int main() {
     printf("|_______________________________________________________________________| \n");
     printf("|    x    |       sum of row        |         function        |  iter   |\n");
     printf("|_________|_________________________|_________________________|_________|\n");
-    for (ldbl x = a; x <= b + epsilon(); x += step) {
+    for (ldbl x = a; x <= b step/2; x += step) {
       for (n = 0; n < MAX_ITER; n++) {
         result = Taylor(x, n);
         if (fabs(result) <= fmax(relative_eps * fabs(result), abs_eps)) {
