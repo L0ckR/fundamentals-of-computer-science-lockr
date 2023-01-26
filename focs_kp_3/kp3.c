@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <math.h>
 
-#define MAX_ITER 100
+#define MAX_ITER 50
 
 typedef long double ldbl;
 
@@ -20,15 +20,18 @@ ldbl function(ldbl x) {
 
 ldbl Taylor(ldbl x, int n) {
     ldbl sum = 0;
-    for (ldbl i = 0.0; i <= n; i++) {
-      sum -= (1 + 2.0/pow(3.0, i + 1))*pow(x, i);
+    ldbl three = 3;
+    ldbl x_i = 1;
+    for (int i = 0; i <= n; i++) {
+      sum -= (1 + 2.0/three)*x_i;
+      three *= 3.0;
+      x_i *= x;
     }
     return sum;
 }
 
 int main() {
     ldbl abs_eps = epsilon();
-    ldbl relative_eps = sqrt(abs_eps);
     ldbl a = 0.0, b = 0.5, result;
     int n;
     printf("Enter the number of iterations: ");
@@ -36,19 +39,14 @@ int main() {
     printf("Machine epsilon for long double = %.16Le\n", abs_eps);
     ldbl step = (b - a) / n;
     printf("Taylor series value table for function f(x) = (3*x - 5)/(x^2 - 4*x + 3)\n");
-    printf("|_______________________________________________________________________| \n");
-    printf("|    x    |       sum of row        |         function        |  iter   |\n");
-    printf("|_________|_________________________|_________________________|_________|\n");
-    for (ldbl x = a; x <= b step/2; x += step) {
-      for (n = 0; n < MAX_ITER; n++) {
-        result = Taylor(x, n);
-        if (fabs(result) <= fmax(relative_eps * fabs(result), abs_eps)) {
-          break;
-        }
-      }
-      printf("| %.5Lf | %.20Lf | %.20Lf |   %d\t|\n", x, result, function(x), n);
+    printf("|_____________________________________________________________ \n");
+    printf("|    x    |       sum of row        |         function        |\n");
+    printf("|_________|_________________________|_________________________|\n");
+    for (ldbl x = a; x <= b + epsilon(); x += step) {
+      result = Taylor(x, MAX_ITER);
+      printf("| %.5Lf | %.20Lf | %.20Lf |\n", x, result, function(x));
       result = 0.0;
     }
-    printf("|_________|_________________________|_________________________|_________|\n");
+    printf("|_________|_________________________|_________________________|\n");
     return 0;
 }
