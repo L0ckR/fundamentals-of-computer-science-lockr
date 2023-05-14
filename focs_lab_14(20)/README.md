@@ -79,7 +79,7 @@
  | --- | ``--no-ignore-file-name-case`` | Учитывать регистр при сравнении имен файлов                                                 |
  | --- | ``-x, --exclude=PAT      `` | Исключить файлы, которые соответствуют шаблону PAT                                             |
  | --- | ``-X, --exclude-from=FILE`` | Исключить файлы, соответствующие любому шаблону в FILE                                         |
- | --- | ``-S, --starting-file=FILE| Начать с FILE при сравнении каталогов                                                          |
+ | --- | ``-S, --starting-file=FILE``| Начать с FILE при сравнении каталогов                                                          |
  | --- | ``--from-file=FILE1      `` | Сравнить FILE1 со всеми операндами; FILE1 может быть каталогом                                 |
  | --- | ``--to-file=FILE2        `` | Сравнить все операнды с FILE2; FILE2 может быть каталогом                                      |
  | --- | ``-i, --ignore-case      `` | Игнорировать различия в регистре в содержимом файлов                                           |
@@ -93,7 +93,7 @@
  | --- | ``--strip-trailing-cr    `` | Убрать завершающий символ возврата каретки ввода                                               |
  | --- | ``-D NAME, --ifdef=NAME `` | Создать объединенный вывод типа if-then-else, используя имя NAME                               |
  | --- | ``---`` | --- |
-| **``patch``** | Определяет тип файла |
+| **``patch``** |  утилита предназначенная для переноса правок (изменений) между разными версиями текстовых файлов. |
  | --- | ``-p NUM, --strip=NUM`` | Убрать NUM ведущих компонентов из имени файла. |
  | --- | ``-F LINES, --fuzz LINES`` | Установить коэффициент нестрогого соответствия LINES для несовпадающих строк. |
  | --- | ``-l, --ignore-whitespace`` | Игнорировать изменения пробелов между патчем и входным файлом. |
@@ -195,8 +195,105 @@
 ## 8. Распечатка протокола
 
 ```
+lockr@lockR:~/projects$ cd test/
+lockr@lockR:~/projects/test$ touch a.txt
+lockr@lockR:~/projects/test$ touch b.txt
+lockr@lockR:~/projects/test$ cat a.txt
+lockr@lockR:~/projects/test$ vim a.txt 
+lockr@lockR:~/projects/test$ vim b.txt 
+lockr@lockR:~/projects/test$ cat a.txt
+kolpwshuiwd geybundeu ghjkl
+asdfghjkl;'
+rfrfrf
+frvrvv;
+lockr@lockR:~/projects/test$ cat b.txt
+qwertyuiop[asdfghjkl;'
+asdfghjkl;'
+zxcvbnm,./
+lockr@lockR:~/projects/test$ diff a.txt b.txt
+1c1
+< kolpwshuiwd geybundeu ghjkl
+---
+> qwertyuiop[asdfghjkl;'
+3,4c3
+< rfrfrf
+< frvrvv;
+---
+> zxcvbnm,./
+lockr@lockR:~/projects/test$ file a.txt
+a.txt: ASCII text
+lockr@lockR:~/projects/test$ file b.txt
+b.txt: ASCII text
+lockr@lockR:~/projects/test$ diff a.txt b.txt -n
+d1 1
+a1 1
+qwertyuiop[asdfghjkl;'
+d3 2
+a4 1
+zxcvbnm,./
+lockr@lockR:~/projects/test$ diff -n a.txt b.txt
+d1 1
+a1 1
+qwertyuiop[asdfghjkl;'
+d3 2
+a4 1
+zxcvbnm,./
+lockr@lockR:~/projects/test$ diff -q a.txt b.txt
+Files a.txt and b.txt differ
+lockr@lockR:~/projects/test$ cp a.txt a_copy.txt
+lockr@lockR:~/projects/test$ ls
+a.txt  a_copy.txt  b.txt
+lockr@lockR:~/projects/test$ diff -q a.txt a_copy.txt
+lockr@lockR:~/projects/test$ diff -s a.txt a_copy.txt
+Files a.txt and a_copy.txt are identical
+lockr@lockR:~/projects/test$ diff -s a.txt b.txt
+1c1
+< kolpwshuiwd geybundeu ghjkl
+---
+> qwertyuiop[asdfghjkl;'
+3,4c3
+< rfrfrf
+< frvrvv;
+---
+> zxcvbnm,./
+lockr@lockR:~/projects/test$ diff -y a.txt b.txt
+kolpwshuiwd geybundeu ghjkl                                   | qwertyuiop[asdfghjkl;'
+asdfghjkl;'                                                     asdfghjkl;'
+rfrfrf                                                        | zxcvbnm,./
+frvrvv;                                                       <
+lockr@lockR:~/projects/test$ diff -y -i a.txt b.txt
+kolpwshuiwd geybundeu ghjkl                                   | qwertyuiop[asdfghjkl;'
+asdfghjkl;'                                                     asdfghjkl;'
+rfrfrf                                                        | zxcvbnm,./
+frvrvv;                                                       <
+lockr@lockR:~/projects/test$ diff --strip-trailing-cr -i a.txt b.txt
+1c1
+< kolpwshuiwd geybundeu ghjkl
+---
+> qwertyuiop[asdfghjkl;'
+3,4c3
+< rfrfrf
+< frvrvv;
+---
+> zxcvbnm,./
+lockr@lockR:~/projects/test$ diff -u a.txt b.txt > ab.patch
+lockr@lockR:~/projects/test$ cat ab.patch 
+--- a.txt       2023-05-14 23:19:35.749087169 +0300
++++ b.txt       2023-05-14 23:54:22.652218405 +0300
+@@ -1,4 +1,3 @@
+-kolpwshuiwd geybundeu ghjkl
++qwertyuiop[asdfghjkl;'
+ asdfghjkl;'
+-rfrfrf
+-frvrvv;
++zxcvbnm,./
 ```
-
+lockr@lockR:~/projects/test$ patch a.txt < ab.patch 
+patching file a.txt
+lockr@lockR:~/projects/test$ cat a.txt
+qwertyuiop[asdfghjkl;'
+asdfghjkl;'
+zxcvbnm,./
 
 ## 9. Дневник отладки
 
