@@ -287,14 +287,14 @@ lockr@lockR:~/projects/test$ cat ab.patch
 -rfrfrf
 -frvrvv;
 +zxcvbnm,./
-```
+
 lockr@lockR:~/projects/test$ patch a.txt < ab.patch 
 patching file a.txt
 lockr@lockR:~/projects/test$ cat a.txt
 qwertyuiop[asdfghjkl;'
 asdfghjkl;'
 zxcvbnm,./
-
+```
 ## 9. Дневник отладки
 
 | **№** | **Лаб.Или Дом.** | **Дата** | **Время** | **Событие** | **Действие по исправлению** | **Примечание** |
