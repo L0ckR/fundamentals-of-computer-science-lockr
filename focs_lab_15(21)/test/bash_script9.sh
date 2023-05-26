@@ -5,9 +5,11 @@ function rename_files() {
   local root=$1
   local symbol=$2
   local length=$3
+
   for filename in "$root"/*; do
     echo $(basename -- $filename)
-    if [ -f "$filename" ] && [ "$(basename -- $filename)" != "${0##*/}" ]; then
+    if [ -f "$filename" ] && [ "$(basename -- $filename)" != "${0##*/}" ]
+    then
       name=$(basename -- "$filename")
       extension="${name##*.}"
       name="${name%.*}"
@@ -23,19 +25,25 @@ function rename_files() {
   done
 }
 
-if [ "$1" == "?" ]; then
-  echo "bash bash_script.sh [root] [symbol] [length]"
-  echo -e "\troot - это путь к директории"
-  echo -e "\tsymbol - символ, которым будет дополнено имя"
-  echo -e "\tlength - желаемая длина имени"
-elif ["$1" == ''] || ["$2" == ''] || ["$3" == '']; then
-  echo "Аргументы были введены неверно, для справки вызовите с ключом "?"."
+if [ "$#" == "3" ]
+then 
+  echo "ok"
+    if [ "$1" == "." ]
+    then
+      rename_files "$PWD" "$2" "$3"
+      echo "Готово!"
+    else
+      rename_files "$1" "$2" "$3"
+      echo "Готово!"
+    fi
 else
-  if [ "$1" == "." ]; then
-    rename_files "$PWD" "$2" "$3"
-    echo "Готово!"
+  if [ "$#" == "1" ] && [ "$1" == "?" ]
+  then
+    echo "bash bash_script.sh [root] [symbol] [length]"
+    echo -e "\troot - это путь к директории"
+    echo -e "\tsymbol - символ, которым будет дополнено имя"
+    echo -e "\tlength - желаемая длина имени"
   else
-    rename_files "$1" "$2" "$3"
-    echo "Готово!"
+    echo "Аргументы были введены неверно, для справки вызовите с ключом "?"."
   fi
 fi
