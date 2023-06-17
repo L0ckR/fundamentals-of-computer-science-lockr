@@ -35,7 +35,53 @@
 4. Вывод ответа.
 
 ## 7. Сценарий выполнения работы [план работы, первоначальный текст программы в черновике (можно на отдельном листе) и тесты либо соображения по тестированию]. 
-https://github.com/mai-806-1st-year/fundamentals-of-computer-science-superlocker/blob/ca235291c57e6ddb6b02b38077b323f28ea3dd32/focs_lab_13(15)/lab15.c#L1-L44
+```
+
+#include <stdio.h>
+#include <stdlib.h>
+
+void out(int N, int m[], int n_g){
+  int b[N*N];
+  for (int k = n_g%(N*N) - 1; k >= 0; --k)
+  {
+    b[k] = m[N*N - (n_g%(N*N) - k)];
+  }
+  for (int k = 0; k < N*N - n_g%(N*N); k++)
+  {
+    b[k + n_g%(N*N)] = m[k];
+  }
+  printf("OUT:\n");
+  for (int i = 0; i < N; i++){
+    for (int j = 0; j < N; j++) {
+      printf("%d ", b[i * N + j]);
+    }
+    printf("\n");
+  }
+}
+
+
+int main() {
+  int N;
+  //  = 7;
+  int n_g;
+  printf("GROUP NUMBER\n");
+  scanf("%d", &n_g);
+  printf("MATRIX SIZE:\n");
+  scanf("%d", &N);
+  int m[N*N];
+  // = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49};
+   
+  printf("MATRIX:\n");
+
+  for (int k = 0; k != N*N; k++)
+  {
+      scanf("%d", &m[k]);
+  }
+  out(N, m, n_g);
+  
+}
+```
+
 Пункты 1-7 отчета составляются сторого до начала лабораторной работы.
 Допущен к выполнению работы.  
 <b>Подпись преподавателя:</b> ________________
