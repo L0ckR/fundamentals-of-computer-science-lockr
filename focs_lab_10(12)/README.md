@@ -43,7 +43,78 @@
 
 
 ## 7. Сценарий выполнения работы [план работы, первоначальный текст программы в черновике (можно на отдельном листе) и тесты либо соображения по тестированию]. 
-https://github.com/mai-806-1st-year/fundamentals-of-computer-science-superlocker/blob/296c82121c8916e94aaa861a821e7834b87a880d/focs_lab_10(12)/lab12.c#L1-L70
+```#include <stdio.h>
+#include <stdbool.h>
+#include <ctype.h>
+#include <stdlib.h>
+
+#define DBL_LOG102 (3.010299956639811952E-1)
+#define INT_WIDTH (32)
+#define N (((int) (DBL_LOG102 * (INT_WIDTH - 1) + 1))-1)
+
+typedef enum
+{
+    OUTSIDE,
+    WRONG_WORD_NO
+} Conditions;
+
+void check_poryadok(){
+    Conditions condition = OUTSIDE;
+    for (int ch = getchar(); ch != EOF; ch = getchar())
+    {
+        switch (condition){
+            case OUTSIDE:
+                if (isdigit(ch))
+                {
+                    int temp = ch;
+                    int k = 0;
+                    while (k <= 10){
+                        k++;
+                        ch = getchar();
+                        if (isdigit(ch)){
+                            if (ch > temp){
+                                condition = WRONG_WORD_NO;
+                                printf("NO");
+                                goto wwn;
+                            }
+                        }else if (ch == ' ' || ch == EOF){
+                            break;
+                        }
+                    }
+                    if (ch == EOF || ch == ' '){
+                        printf("YES");
+                        putchar(ch);
+                        continue;
+                    }
+                }else if ( ch == '-')
+                {
+                    condition = OUTSIDE;
+                    continue;
+                }
+            wwn:case WRONG_WORD_NO:
+                while (ch != ' ' && ch != EOF)
+                {
+                    ch = getchar();
+                }
+                if (ch == EOF)
+                {
+                    putchar(ch);
+                    break;
+                }
+                putchar(ch);
+                condition = OUTSIDE;
+                continue;
+        }
+    }
+}
+
+
+int main(){
+    check_poryadok();
+    return 0;
+}
+```
+
 Пункты 1-7 отчета составляются сторого до начала лабораторной работы.
 Допущен к выполнению работы.  
 <b>Подпись преподавателя:</b> ________________
