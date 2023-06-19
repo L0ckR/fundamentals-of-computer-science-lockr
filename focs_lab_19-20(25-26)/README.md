@@ -45,6 +45,246 @@
 ## 7. Сценарий выполнения работы
 Очередь — абстрактный тип данных с дисциплиной доступа к элементам «первый пришёл — первый вышел» (FIFO, англ. first in, first out).
 Для работы с деком реализованы следующие операции:
+```
+lockr@lockR:~/projects/labs/fundamentals-of-computer-science-lockr/focs_lab_19-20(25-26)/headers$ cat header.h 
+#ifndef _HEADER_H
+#define _HEADER_H
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <stdbool.h>
+
+#include "queue.h"
+#include "sort.h"
+
+#endif
+    lockr@lockR:~/projects/labs/fundamentals-of-computer-science-lockr/focs_lab_19-20(25-26)/headers$ cat queue.h 
+#include <stdbool.h>
+
+typedef struct item item;
+
+struct item {
+    double value;
+    item* next;
+};
+
+typedef struct {
+    item* first;
+    item* last;
+    int size;
+} queue;
+
+void    create(queue* q);
+bool    is_empty(queue* q);
+int     size(queue* q);
+bool    push(queue* q, const double value);
+double  pop(queue* q);
+void    printQ(queue* q);
+void    destroy(queue* q);
+lockr@lockR:~/projects/labs/fundamentals-of-computer-science-lockr/focs_lab_19-20(25-26)/headers$ cat sort.h 
+// вставка элемента в отсортированную очередь с сохранением порядка
+// сортировка простой вставкой
+
+void insert(queue* q, double elem);
+void sort(queue* q);
+lockr@lockR:~/projects/labs/fundamentals-of-computer-science-lockr/focs_lab_19-20(25-26)/headers$ cd ../
+lockr@lockR:~/projects/labs/fundamentals-of-computer-science-lockr/focs_lab_19-20(25-26)$ cd src/
+lockr@lockR:~/projects/labs/fundamentals-of-computer-science-lockr/focs_lab_19-20(25-26)/src$ cat queue.c 
+#include "../headers/header.h"
+
+void create(queue* q){
+    q->first = q->last = malloc(sizeof(item));
+    q->size = 0;
+}
+
+bool is_empty(queue* q){
+    return q->first == q->last;
+}
+
+int size(queue* q){
+    return q->size;
+}
+
+bool push(queue* q, const double value){
+    if (!(q->last->next = malloc(sizeof(item)))){
+        return false;
+    }
+    q->last->value = value;
+    q->last = q->last->next;
+    q->size++;
+    return true;
+}
+
+double pop(queue* q){
+    item *tmp = q->first;
+    double value = tmp->value;
+    q->first = q->first->next;
+    q->size--;
+    free(tmp);
+    return value;
+}
+
+void printQ(queue* q){
+    int len = size(q);
+    item *tmp = q->first;
+    for (int i = 0; i < len; ++i){
+        double value = tmp->value;
+        printf("%lf ", value);
+        tmp = tmp->next;
+    }
+    printf("\n");
+}
+
+void destroy(queue* q){
+    q->last->next = NULL;
+    item* tmp = q->first;
+    q->first = q->first->next;
+    free(tmp);
+    if (q->first){
+        destroy(q);
+    }
+    q->last = NULL;
+    q->size = 0;
+}
+lockr@lockR:~/projects/labs/fundamentals-of-computer-science-lockr/focs_lab_19-20(25-26)/src$ cat sort.c 
+#include "../headers/header.h"
+
+void insert(queue* buffer, double elem){
+
+    int buffer_length = size(buffer);
+
+    if (size(buffer) == 1){
+        double cmp = pop(buffer);
+        if (cmp >= elem){
+            push(buffer, elem);
+            push(buffer, cmp);
+        } else {
+            push(buffer, cmp);
+            push(buffer, elem);
+        }
+    } else {
+        double left = pop(buffer);
+        double right = pop(buffer);
+        int position = 2;
+        for (int i = 0; i <= size(buffer); ++i){
+            if (elem <= left){
+                push(buffer, elem);
+                push(buffer, left);
+                push(buffer, right);
+                for (int j = position; j < size(buffer) - 1; ++j){
+                    double tmp = pop(buffer);
+                    push(buffer, tmp);
+                }
+                break;
+            } else if (elem > left && elem <= right){
+                push(buffer, left);
+                push(buffer, elem);
+                push(buffer, right);
+                for (int j = position; j < size(buffer) - 1; ++j){
+                    double tmp = pop(buffer);
+                    push(buffer, tmp);
+                    printQ(buffer);
+                }
+                break;
+            } else {
+                push(buffer, left);
+                if (position == buffer_length){
+                    push(buffer, right);
+                    push(buffer, elem);
+                    printQ(buffer);
+                    break;
+                } else {
+                    left = right;
+                    right = pop(buffer);
+                    position++;
+                }
+            }
+        }
+    }
+
+}
+
+void sort(queue* q){
+
+    int sorted = 1;
+    if (sorted == size(q)){ return; }
+
+    queue buffer; 
+    create(&buffer);
+
+    while (sorted < size(q)){
+    
+        for (int i = 0; i < sorted; ++i){
+            double tmp = pop(q);
+            push(&buffer, tmp);
+        }
+
+        double elem = pop(q);
+        insert(&buffer, elem);
+
+        while (!is_empty(q)){
+            double tmp = pop(q);
+            push(&buffer, tmp);
+        }
+
+        while (!is_empty(&buffer)){
+            double tmp = pop(&buffer);
+            push(q, tmp);
+        }
+        
+        sorted++;
+
+    }
+    destroy(&buffer);
+
+}
+lockr@lockR:~/projects/labs/fundamentals-of-computer-science-lockr/focs_lab_19-20(25-26)/src$ cat main.c 
+#include "../headers/header.h"
+
+void print_result(queue* q){
+    printQ(q);
+    double elem = pop(q);
+    bool is_sorted = true;
+    while (!is_empty(q)){
+        double next_elem = pop(q);
+        if (elem > next_elem){
+            is_sorted = false;
+        }
+        elem = next_elem;
+    }
+    if (is_sorted){
+        printf("Yes\n");
+    } else {
+        printf("No\n");
+    }
+}
+
+int main(){
+
+    queue q;
+    create(&q);
+
+    int m;
+    printf("Input number of elements\n");
+    scanf("%d", &m);
+    printf("Enter %d values\n", m);
+    for (int i = 0; i < m; ++i){
+        double n;
+        scanf("%lf", &n);
+        push(&q, n);
+    }
+    printQ(&q);
+    if (!is_empty(&q)){
+        sort(&q);
+        print_result(&q);
+    } else {
+        printf("Empty queue\n");
+    }
+    destroy(&q);
+
+}
+```
+
 
 ## 8. Распечатка протокола
 
@@ -113,9 +353,11 @@ Yes
 | **1** | **Дом.** | **25.05.23** | **13:00** | **** | **-** | **-** |
 
 ## 10. Замечания автора по существу работы
+Codeforces Round 873 (Div. 2)
 
+Educational Codeforces Round 149 (Rated for Div. 2)
 
 ## 11. Выводы
-
+Были получены знания по динамическим структурам, а так же Makefile.
 
 <b>Подпись студента:</b> ___________
