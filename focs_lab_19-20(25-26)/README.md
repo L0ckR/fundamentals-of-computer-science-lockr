@@ -350,14 +350,14 @@ Yes
 
 | **№** | **Лаб.Или Дом.** | **Дата** | **Время** | **Событие** | **Действие по исправлению** | **Примечание** |
 | --- | --- | --- | --- | --- | --- | --- |
-| **1** | **Дом.** | **25.05.23** | **13:00** | **** | **-** | **-** |
+| **1** | **Дом.** | **25.05.23** | **13:00** | **Выполнение лаб. работы** | **-** | **-** |
 
 ## 10. Замечания автора по существу работы
-Codeforces Round 873 (Div. 2)
-https://codeforces.com/contest/1828/submission/205862989
+Codeforces Round 873 (Div. 2)\
+[Задача 1828A](https://codeforces.com/contest/1828/submission/205862989)
 
-Educational Codeforces Round 149 (Rated for Div. 2)
-https://codeforces.com/contest/1837/submission/207179068
+Educational Codeforces Round 149 (Rated for Div. 2)\
+[Задача 1837A](https://codeforces.com/contest/1837/submission/207179068)
 
 
 ## 11. Выводы

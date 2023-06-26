@@ -1,0 +1,47 @@
+#ifndef _TREE_H_
+#define _TREE_H_
+#include <stdbool.h>
+#include <stddef.h>
+#define TREE_FORMAT_STR "%.3f\n"
+
+typedef float tree_t; 
+
+typedef struct tree_node
+{
+    struct tree_node * left, * right;
+    tree_t value;
+} tree_node;
+
+typedef struct
+{
+    tree_node * root;
+    size_t size;
+} tree;
+
+bool tree_is_empty(const tree * tree);
+
+void tree_clear(tree * tree);
+
+bool tree_contains(const tree * tree, tree_t value);
+
+void tree_create(tree * tree);
+
+void simple_print_tree(tree * tree);
+
+void simple_print_node(tree_node * t);
+
+int tree_erase(tree * tree, tree_t value);
+
+int tree_insert(tree * tree, tree_t value);
+
+size_t tree_size(const tree * tree);
+
+void tree_destroy(tree * tree);
+
+void tree_print_inorder(const tree * tree);
+
+void tree_print_preorder(const tree * tree);
+
+void tree_print_postorder(const tree * tree);
+
+#endif // _TREE_H_
