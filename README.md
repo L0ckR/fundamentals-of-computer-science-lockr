@@ -13,7 +13,7 @@ Codeforces Round 873 (Div. 2)\
 
 
 Еще не конвертировано:
-[Задача 1820B div.2 решена на доревшивании](https://codeforces.com/contest/1820/submission/208196462)
+[Задача 1820B div.2 решена на дорешивании](https://codeforces.com/contest/1820/submission/208196462)
 [Задача 1838B div.2 решена на контесте](https://codeforces.com/contest/1838/submission/208496333)
 [Задача 1843B div.3 решена на контесте](https://codeforces.com/contest/1843/submission/210451794)
 [Задача 1843С div.3 решена на контесте](https://codeforces.com/contest/1843/submission/210424881)

@@ -19,5 +19,5 @@ sort.o: src/sort.c $(HEADERS)
 	$(CC) $(CFLAGS) src/sort.c
 
 clean:
-	rm -rf *.o $(NAME)
+	rm -rf src/*.o $(NAME)
 

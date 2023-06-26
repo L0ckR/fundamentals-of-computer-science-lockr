@@ -1,9 +1,8 @@
 CC=gcc
-RM=rm -fr
 CFLAGS=-Wall -Werror -Wextra -Wfatal-errors -Wpedantic -pedantic-errors -std=c18
 LDFLAGS=
-LDLIBS=
-SOURCES= src/stack.c src/tree.c src/main.c src/tree_func.c
+LDLIBS= -lm
+SOURCES= src/main.c src/expr_tree.c src/stack.c
 OBJECTS=$(SOURCES:.c=.o)
 EXECUTABLE=main
 
@@ -16,7 +15,8 @@ $(EXECUTABLE): $(OBJECTS)
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
-	$(RM) src/*.o $(EXECUTABLE)
+	rm -rf src/*.o $(EXECUTABLE)
 
 debug: CFLAGS+=-Og -g
-debug: all
+
+.PHONY: all debug clean
