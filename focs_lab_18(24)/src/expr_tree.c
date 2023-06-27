@@ -310,28 +310,34 @@ static void preorderTransform(Node *const node)
                 node->nodeType = VALUE;
                 node->nodeUnion.value = 1;
                 return;
-
-            }else if(degree < 0)
-            {
-                Node *tmp = nodeDeepCopy(node->nodeUnion.op.left);
-                postorderDestroy(node->nodeUnion.op.left);
-                postorderDestroy(node->nodeUnion.op.right);
-                node->nodeUnion.op.left = malloc(sizeof(Node));
-                node->nodeUnion.op.left->nodeType = VALUE;
-                node->nodeUnion.op.left->nodeUnion.value = 1; 
-                node->nodeUnion.op.opChar = '/';
-                tmp->nodeUnion.op.right->nodeUnion.value = tmp->nodeUnion.op.right->nodeUnion.value *(-1);
-                node->nodeUnion.op.right = tmp;
+            // }else if(degree < 0)
+            // {
+            //     Node *tmp = nodeDeepCopy(node->nodeUnion.op.left);
+            //     postorderDestroy(node->nodeUnion.op.left);
+            //     postorderDestroy(node->nodeUnion.op.right);
+            //     node->nodeUnion.op.left = malloc(sizeof(Node));
+            //     node->nodeUnion.op.left->nodeType = VALUE;
+            //     node->nodeUnion.op.left->nodeUnion.value = 1; 
+            //     node->nodeUnion.op.opChar = '/';
+            //     tmp->nodeUnion.op.right->nodeUnion.value = tmp->nodeUnion.op.right->nodeUnion.value *(-1);
+            //     node->nodeUnion.op.right = tmp;
                 
             }else if(degree > 0)
             {  
                 if (degree == 1){
-                    memcpy(node, node->nodeUnion.op.left, sizeof(Node));
+                    Node *tmp = nodeDeepCopy(node->nodeUnion.op.left);
+                    postorderDestroy(node->nodeUnion.op.left);
+                    postorderDestroy(node->nodeUnion.op.right);
+                    node->nodeUnion = tmp->nodeUnion;
+                    node->nodeType = tmp->nodeType;
+                    free(tmp);
                     return;
                 }else{
                     Node *tmp = nodeDeepCopy(node);
                     node->nodeUnion.op.opChar = '*';
                     --tmp->nodeUnion.op.right->nodeUnion.value;
+                    tmp->parent = node;
+                    postorderDestroy(node->nodeUnion.op.right);
                     node->nodeUnion.op.right = tmp;
                 }
             }

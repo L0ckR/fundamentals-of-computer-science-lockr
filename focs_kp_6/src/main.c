@@ -30,7 +30,7 @@ char * const os_type_str[] = {
     [LINUX] = " LINUX     ",
     [MAC_OS] = " MAC_OS    ",
     [WINDOWS_7] = " WINDOWS_7 ",
-    [WINDOWS_8] = " WINDOWS_8   ",
+    [WINDOWS_8] = " WINDOWS_8 ",
     [WINDOWS_10]= " WINDOWS_10",
     [WINDOWS_11] = " WINDOWS_11"
 };
@@ -175,9 +175,8 @@ int main(int argc, char **argv) {
         }
     }
     if (wasFilename && mode == 1) {
-        if (fopen(filename, "r")){
-            FILE *bin = 
-            fopen(filename, "r");
+        FILE *bin = fopen(filename, "r");
+        if (bin){
             printTable(bin);
             fclose(bin);
         }
@@ -186,8 +185,8 @@ int main(int argc, char **argv) {
             return 0;
         }
     } else if (wasFilename && mode == 2) {
-        if (fopen(filename, "r")){
-            FILE *bin = fopen(filename, "r");
+        FILE *bin = fopen(filename, "r");
+        if (bin){
             func(bin);
             fclose(bin);
         }
