@@ -700,7 +700,155 @@ debug: CFLAGS+=-Og -g
 ## 8. Распечатка протокола
 
 ```
-
+lockr@lockR:~/projects/labs/fundamentals-of-computer-science-lockr/focs_lab_18(24)$ make all
+gcc -Wall -Werror -Wextra -Wfatal-errors -Wpedantic -pedantic-errors -std=c18 -c src/expr_tree.c -o src/expr_tree.o
+gcc  src/main.o src/expr_tree.o src/stack.o -lm -o main
+lockr@lockR:~/projects/labs/fundamentals-of-computer-science-lockr/focs_lab_18(24)$ valgrind --leak-check=full  ./main < test.txt
+==909== Memcheck, a memory error detector
+==909== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==909== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==909== Command: ./main
+==909== 
+(5+8)^(1)
+----------------------
+5.000000 8.000000 + 1.000000 ^ 
+----------------------
+ 1.000000
+^
+  8.000000
+ +
+  5.000000
+----------------------
+Calculated: 13.000000
+----------------------
+Transformation:
+ 8.000000
++
+ 5.000000
+----------------------
+Calculated: 13.000000
+==909== 
+==909== HEAP SUMMARY:
+==909==     in use at exit: 0 bytes in 0 blocks
+==909==   total heap usage: 16 allocs, 16 frees, 5,472 bytes allocated
+==909== 
+==909== All heap blocks were freed -- no leaks are possible
+==909== 
+==909== For lists of detected and suppressed errors, rerun with: -s
+==909== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+lockr@lockR:~/projects/labs/fundamentals-of-computer-science-lockr/focs_lab_18(24)$ valgrind --leak-check=full  ./main < test.txt
+==996== Memcheck, a memory error detector
+==996== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==996== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==996== Command: ./main
+==996== 
+((5+8)^(1)+(5-8)^(3))^(5)
+----------------------
+5.000000 8.000000 + 1.000000 ^ 5.000000 8.000000 - 3.000000 ^ + 5.000000 ^ 
+----------------------
+ 5.000000
+^
+   3.000000
+  ^
+    8.000000
+   -
+    5.000000
+ +
+   1.000000
+  ^
+    8.000000
+   +
+    5.000000
+----------------------
+Calculated: -537824.000000
+----------------------
+Transformation:
+      3.000000
+     ^
+       8.000000
+      -
+       5.000000
+    +
+      1.000000
+     ^
+       8.000000
+      +
+       5.000000
+   *
+        8.000000
+       -
+        5.000000
+      *
+        8.000000
+       -
+        5.000000
+     *
+       8.000000
+      -
+       5.000000
+    +
+      8.000000
+     +
+      5.000000
+  *
+       8.000000
+      -
+       5.000000
+     *
+       8.000000
+      -
+       5.000000
+    *
+      8.000000
+     -
+      5.000000
+   +
+     8.000000
+    +
+     5.000000
+ *
+      8.000000
+     -
+      5.000000
+    *
+      8.000000
+     -
+      5.000000
+   *
+     8.000000
+    -
+     5.000000
+  +
+    8.000000
+   +
+    5.000000
+*
+     8.000000
+    -
+     5.000000
+   *
+     8.000000
+    -
+     5.000000
+  *
+    8.000000
+   -
+    5.000000
+ +
+   8.000000
+  +
+   5.000000
+----------------------
+Calculated: -537824.000000
+==996== 
+==996== HEAP SUMMARY:
+==996==     in use at exit: 0 bytes in 0 blocks
+==996==   total heap usage: 151 allocs, 151 frees, 10,808 bytes allocated
+==996== 
+==996== All heap blocks were freed -- no leaks are possible
+==996== 
+==996== For lists of detected and suppressed errors, rerun with: -s
+==996== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
 lockr@lockR:~/projects/labs/fundamentals-of-computer-science-lockr/focs_lab_18(24)$ valgrind --leak-check=full --show-leak-kinds=all -s ./main < test.txt
 ==10452== Memcheck, a memory error detector
 ==10452== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
@@ -743,7 +891,7 @@ Calculated: 1.000000
 
 ## 10. Замечания автора по существу работы
 Codeforces Round 876 (Div. 2) \
-[Задача 1839A решена на контесте](https://codeforces.com/contest/1839/submission/208344759) \
+[Задача 1839A решена на контесте](https://codeforces.com/contest/1839/submission/208344759)
 
 ## 11. Выводы
 После выполнения работы, были получены продвинутые навыки обработки строк и бинарных деревьев в языке Си.

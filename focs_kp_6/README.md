@@ -469,7 +469,7 @@ lockr@lockR:~/projects/labs/fundamentals-of-computer-science-lockr/focs_kp_6$ ./
 
 ## 10. Замечания автора по существу работы
 Educational Codeforces Round 150 (Rated for Div. 2) \
-[Задача 1841A решена на контесте](https://codeforces.com/contest/1841/submission/209455003) \
+[Задача 1841A решена на контесте](https://codeforces.com/contest/1841/submission/209455003)
 
 ## 11. Выводы
 После выполнения работы, были получены продвинутые навыки обработки строк и бинарных деревьев в языке Си.
